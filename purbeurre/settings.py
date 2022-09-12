@@ -28,7 +28,7 @@ SECRET_KEY = "django-insecure-fm4gqs@+za0qm0vbx^3qotbg)sds-70k4)r2at#p#ni3yiq@on
 #DEBUG = False if os.environ.get("ENV", "development") == "production" else True
 DEBUG = True
 
-ALLOWED_HOSTS = ["test-purbeurre.herokuapp.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
