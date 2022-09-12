@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="masthead"     
+    <div class="container px-4 px-lg-5 h-100">        
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-8 align-self-end">
+                <center>
+                    <h2>Votre produit: {{ product.name }}</h2>
+                </center>
+               
+            </div>
+        </div>
+    </div>
+</header>
+
+
+    <li> 
+        <img class="img-responsive" src="{{ product.image }}" alt="{{ product.name }}">
+        
+    </li>
+    <center>
+    <ul>
+        <li>id : {{ product.id }}</li>
+        <li>nom : {{ product.name }}</li>
+        <li>nutriscore : {{ product.nutriscore }}</li>
+        <li>stores : {{ product.stores }}</li>    
+        <li>code : {{ product.code }}</li>
+    
+    </ul>
+    </center>
+{% endblock content %}
