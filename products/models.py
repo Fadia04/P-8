@@ -4,12 +4,12 @@ from django.db import models
 # Create your models here.
 
 class Product(models.Model):
-    name = models.CharField(max_length=100)  # unique=True
+    name = models.CharField(max_length=512)  # unique=True
     nutriscore = models.CharField(max_length=1, null=False)
 
     image = models.URLField(null=True)
-    code = models.CharField(max_length=50)  # null=False
-    stores = models.CharField(max_length=200)  # null=False
+    code = models.CharField(max_length=512)  # null=False
+    stores = models.CharField(max_length=512)  # null=False
     url = models.URLField(unique=True)
 
     def __str__(self):
@@ -17,7 +17,7 @@ class Product(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)  # unique=True
+    name = models.CharField(max_length=512)  # unique=True
     # products = models.ManyToManyField(Product, through='Categorized')
 
     def __str__(self):
