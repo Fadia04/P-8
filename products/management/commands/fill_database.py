@@ -29,7 +29,7 @@ class Command(BaseCommand):
                 and data.get("nutriscore_grade")
             ):
                 product = Product.objects.get_or_create(
-                    name=data.get("product_name_fr").lower(),
+                    name=data.get("product_name_fr").lower()[:199],
                     url=data.get("url").lower(),
                     image=data.get("image_url"),
                     stores=data.get("stores").lower(),
