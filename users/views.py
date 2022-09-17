@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.conf import settings
 from . import forms
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -25,7 +26,6 @@ def login_page(request):
             )
             if user is not None:
                 login(request, user)
-                # message = f'Bonjour, {user.username}! Vous êtes connecté.'
                 return redirect("home")
             else:
                 message = "Identifiants invalides."
@@ -44,3 +44,17 @@ def signup_page(request):
             login(request, user)
             return redirect(settings.LOGIN_REDIRECT_URL)
     return render(request, "users/signup.html", context={"form": form})
+
+@login_required
+def profile_page(request):
+    print("User : ", request.user.first_name)
+    return render(
+        request,
+        "users/profile.html",
+    )
+    
+def legal_notices(request):
+    return render(
+        request,
+        "users/legal_notices.html",
+    )

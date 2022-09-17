@@ -29,18 +29,18 @@ def test_signup_page_url():
     path = reverse("signup")
     assert path == "/signup/"
     assert resolve(path).view_name == "signup"
+    
+  
+def test_profile_page_url():
+    path = reverse("profile")
+    assert path == "/profile/"
+    assert resolve(path).view_name == "profile"    
 
 
 def test_favoris_page_url():
     path = reverse("favoris_page")
     assert path == "/favoris/"
     assert resolve(path).view_name == "favoris_page"
-
-
-def test_products_url():
-    path = reverse("product")
-    assert path == "/products/"
-    assert resolve(path).view_name == "product"
 
 
 def test_results_url():

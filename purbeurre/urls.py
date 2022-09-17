@@ -25,10 +25,11 @@ urlpatterns = [
     path("logout/", users.views.logout_user, name="logout"),
     path("", products.views.home, name="home"),
     path("signup/", users.views.signup_page, name="signup"),
-    path("products/", products.views.product, name="product"),
+    path("profile/", users.views.profile_page, name="profile"),
     path("products/<int:id>/", products.views.product_detail, name="product_detail"),
     path("results/", products.views.results, name="results"),
     path("favoris/<int:id>/", favoris.views.favoris, name="favoris"),
     path("delete/<int:id>/", favoris.views.delete_favoris, name="delete_favoris"),
     path("favoris/", favoris.views.favoris, name="favoris_page"),
+    path("legal_notices/", users.views.legal_notices, name="notices"),
 ]

@@ -18,4 +18,4 @@ class TestSearchProduct(StaticLiveServerTestCase):
         self.assertEqual(self.browser.find_element(By.TAG_NAME, "h1").text, "Voici les produits que vous avez demandés:nutella")
         self.assertEqual(self.browser.current_url, self.live_server_url + reverse("results"))
         self.browser.close()   
-        time.sleep(10)
+        time.sleep(20)

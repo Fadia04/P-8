@@ -14,7 +14,7 @@ class Command(BaseCommand):
             {
                 "action": "process",
                 "sort_by": "unique_scans_n",
-                "page_size": 100,
+                "page_size": 1000,
                 "page": 1,
                 "json": 1,
             },
