@@ -9,18 +9,20 @@ class Command(BaseCommand):
     help = "Populate database pur_beurre with OFF products"
 
     def handle(self, *args, **kwargs):
+        """Function to request OFF and fill pur-beurre database using a custom command"""
         req = requests.get(
             "https://fr.openfoodfacts.org/cgi/search.pl",
             {
                 "action": "process",
                 "sort_by": "unique_scans_n",
-                "page_size": 1000,
+                "page_size": 800,
                 "page": 1,
                 "json": 1,
             },
         )
         response = req.json()["products"]
         for data in response:
+            """Insert products when they have specific parameters and then clean them"""
             if (
                 data.get("product_name_fr")
                 and data.get("url")
@@ -41,6 +43,7 @@ class Command(BaseCommand):
         self.stdout.write("Database succesfully populated")
 
     def insert_category(self, categories, product_id):
+        """Method to insert and clean categories and to fill the associative table with categories and products id"""
         categories = categories.lower()
         categories = categories.split(",")
         for i in range(len(categories)):
