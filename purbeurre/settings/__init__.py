@@ -89,9 +89,9 @@ DATABASES = {
     # }
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "pur_beurre",
-        "USER": "postgres",
-        "PASSWORD": "Nejm98nedim",
+        "NAME": "products",
+        "USER": "fadia",
+        "PASSWORD": "fadia0498",
         "HOST": "localhost",
         "PORT": "5432",
     }
