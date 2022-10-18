@@ -138,7 +138,7 @@ STATIC_URL = "static/"
 INTERNAL_IPS = ['127.0.0.1']
 # if os.environ.get('ENV') == 'PRODUCTION':
     #Static files settings
-# STATICFILES_DIRS = [BASE_DIR.joinpath('static'),]
+STATICFILES_DIRS = [BASE_DIR.joinpath('static'),]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
