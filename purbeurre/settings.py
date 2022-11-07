@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import raven
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +32,7 @@ SECRET_KEY = "django-insecure-fm4gqs@+za0qm0vbx^3qotbg)sds-70k4)r2at#p#ni3yiq@on
 DEBUG = False if os.environ.get("ENV", "development") == "production" else True
 # DEBUG = True
 
-ALLOWED_HOSTS = ["178.62.125.169", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["178.62.125.169"]
 
 
 # Application definition
@@ -43,6 +47,7 @@ INSTALLED_APPS = [
     "favoris",
     "products",
     "users",
+    'raven.contrib.django.raven_compat',
 ]
 
 MIDDLEWARE = [
@@ -152,3 +157,72 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "/login/"
 
+#Sentry settings
+sentry_sdk.init(
+    dsn="https://b8865dc2899449b3ba57707d9e9db5b1@o4504024058822656.ingest.sentry.io/4504024069898240",
+        integrations=[
+            DjangoIntegration(),
+        ],
+
+        # Set traces_sample_rate to 1.0 to capture 100%
+        # of transactions for performance monitoring.
+        # We recommend adjusting this value in production.
+        traces_sample_rate=1.0,
+
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True
+)
+
+#Raven settings
+
+RAVEN_CONFIG = {
+        'dsn': 'https://b8865dc2899449b3ba57707d9e9db5b1@o4504024058822656.ingest.sentry.io/4504024069898240', # caution replace by your own!!
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'INFO', # WARNING by default. Change this to capture more than warnings.
+        'handlers': ['sentry'],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                      '%(process)d %(thread)d %(message)s'
+        },
+     },
+    'handlers': {
+        'sentry': {
+            'level': 'INFO', # To capture more than ERROR, change to WARNING, INFO, etc.
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+            'tags': {'custom-tag': 'x'},
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+         }
+     },
+    'loggers': {
+        'django.db.backends': {
+             'level': 'ERROR',
+             'handlers': ['console'],
+             'propagate': False,
+        },
+         'raven': {
+             'level': 'DEBUG',
+             'handlers': ['console'],
+             'propagate': False,
+       },
+        'sentry.errors': {
+             'level': 'DEBUG',
+             'handlers': ['console'],
+             'propagate': False,
+      },
+    },
+ }
