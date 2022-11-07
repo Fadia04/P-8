@@ -19,6 +19,10 @@ import users.views
 import products.views
 import favoris.views
 
+#Test Sentry error
+#def trigger_error(request):
+       # division_by_zero = 1 / 0
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("login/", users.views.login_page, name="login"),
@@ -32,4 +36,5 @@ urlpatterns = [
     path("delete/<int:id>/", favoris.views.delete_favoris, name="delete_favoris"),
     path("favoris/", favoris.views.favoris, name="favoris_page"),
     path("legal_notices/", users.views.legal_notices, name="notices"),
+   # path("sentry-debug/", trigger_error),
 ]

@@ -28,7 +28,7 @@ SECRET_KEY = "django-insecure-fm4gqs@+za0qm0vbx^3qotbg)sds-70k4)r2at#p#ni3yiq@on
 DEBUG = False if os.environ.get("ENV", "development") == "production" else True
 # DEBUG = True
 
-ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["178.62.125.169", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -53,7 +53,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "purbeurre.urls"
@@ -89,9 +88,9 @@ DATABASES = {
     # }
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "pur_beurre",
-        "USER": "postgres",
-        "PASSWORD": "Nejm98nedim",
+        "NAME": "products",
+        "USER": "fadia",
+        "PASSWORD": "fadia0498",
         "HOST": "localhost",
         "PORT": "5432",
     }
@@ -99,8 +98,7 @@ DATABASES = {
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
-# Password validation
-# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
+# Password validatio# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -134,13 +132,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR.joinpath('static'),]
+#Django debug toolbar
+INTERNAL_IPS = ['127.0.0.1']
+if os.environ.get('ENV') == 'PRODUCTION':
+    #Static files settings
+    
+    STATICFILES_DIRS = [BASE_DIR.joinpath('static'),]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-MEDIA_ROOT = "/media/"
+    MEDIA_ROOT = "/media/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

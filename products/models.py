@@ -10,7 +10,7 @@ class Product(models.Model):
     image = models.URLField(null=True)
     code = models.CharField(max_length=512)  # null=False
     stores = models.CharField(max_length=512)  # null=False
-    url = models.URLField(unique=True)
+    url = models.URLField()
 
     def __str__(self):
         return f"{self.name} {self.nutriscore}"
