@@ -152,7 +152,6 @@ if os.environ.get('ENV') == 'PRODUCTION':
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = "login"
-<<<<<<< HEAD
 LOGIN_REDIRECT_URL = "/login/"
 
 #Sentry settings
@@ -224,6 +223,3 @@ LOGGING = {
       },
     },
  }
-=======
-LOGIN_REDIRECT_URL = "/login/"
->>>>>>> debb1310906d38b35fef7cf45b851ac279bae3b0
